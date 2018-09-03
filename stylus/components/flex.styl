@@ -36,8 +36,8 @@ verticalPos = {
 			flex-basis (divider*num)%
 			max-width (divider*num)%
 
-		.offset-{num}
-			margin-left (divider*num)%
+		.offset-{num - 1}
+			margin-left (divider * (num - 1))%
 
 	for breakpoint in breakpoints
 		+breakpoint-up(breakpoint)
@@ -51,8 +51,8 @@ verticalPos = {
 					flex-basis (divider*num)%
 					max-width (divider*num)%
 
-				.offset-{breakpoint}-{num}
-					margin-left (divider*num)%
+				.offset-{breakpoint}-{num - 1}
+					margin-left (divider * (num - 1))%
 
 
 
