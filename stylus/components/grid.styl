@@ -1,0 +1,80 @@
+/*
+/ grid system
+*/
+
+gridArray = 1..13
+gridGap = 15px
+
+.grid
+	display grid
+
+
+
+
+	// ******************** //
+	// gaps //
+	// ******************** //
+
+	&.grid--gap
+		grid-gap gridGap
+
+		&-none
+			grid-gap 0
+
+		// looping breakpoints
+		for breakpoint in breakpoints
+			+breakpoint-up(breakpoint)
+				&-{breakpoint}
+					grid-gap gridGap
+
+				&-{breakpoint}-none
+					grid-gap 0
+
+
+
+
+	// ******************** //
+	// columns
+	// ******************** //
+
+	for num in gridArray
+		&.cols-{num}
+			grid-template-columns repeat(num, 1fr)
+
+	// loop breakpoints
+	for breakpoint in breakpoints
+		+breakpoint-up(breakpoint)
+			for num in gridArray
+				// would return cols-lg-12 (example)
+				&.cols-{breakpoint}-{num}
+					grid-template-columns repeat(num, 1fr)
+
+
+
+
+	// ******************** //
+	// columns start end
+	// ******************** //
+
+	// span
+	for num in gridArray
+		.span-{num}
+			grid-column span num
+
+		.col-start-{num}
+			grid-column-start num
+
+		.col-end-{num}
+			grid-column-end num
+
+	for breakpoint in breakpoints
+		+breakpoint-up(breakpoint)
+			for num in gridArray
+				.span-{breakpoint}-{num}
+					grid-column span num
+
+				.col-start-{breakpoint}-{num}
+					grid-column-start num
+
+				.col-end-{breakpoint}-{num}
+					grid-column-end span num

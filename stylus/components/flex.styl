@@ -1,0 +1,79 @@
+/*
+/ flex system
+*/
+
+// ******************** //
+// variables
+// ******************** //
+flexArray = 1..12
+divider = 100/12
+horizontalPos = {
+	left: flex-start,
+	center: center,
+	right: flex-end,
+	evenly: space-evenly,
+	between: space-between,
+	around: space-around
+}
+verticalPos = {
+	top: flex-start,
+	middle: center,
+	bottom: flex-end
+}
+
+.flex
+	display flex
+	flex-wrap wrap
+
+
+
+	// ******************** //
+	// columns
+	// ******************** //
+
+	for num in flexArray
+		.col-{num}
+			flex-basis (divider*num)%
+			max-width (divider*num)%
+
+		.offset-{num}
+			margin-left (divider*num)%
+
+	for breakpoint in breakpoints
+		+breakpoint-up(breakpoint)
+			for num in flexArray
+				.col-{breakpoint}
+					flex-basis 0
+					flex-grow 1
+					max-width 100%
+
+				.col-{breakpoint}-{num}
+					flex-basis (divider*num)%
+					max-width (divider*num)%
+
+				.offset-{breakpoint}-{num}
+					margin-left (divider*num)%
+
+
+
+	// ******************** //
+	// justify
+	// ******************** //
+
+	for prop, val in horizontalPos
+		&.{prop}
+			justify-content val
+
+	for prop, val in verticalPos
+		&.ver-{prop}
+			align-items val
+
+	for breakpoint in breakpoints
+		+breakpoint-up(breakpoint)
+			for prop, val in horizontalPos
+				&.{prop}-{breakpoint}
+					justify-content val
+
+			for prop, val in verticalPos
+				&.ver-{prop}-{breakpoint}
+					align-items val

@@ -1,0 +1,12 @@
+{
+  "name": "flexgridcombo.css",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+	"scripts": {
+		"start": "yarn run main | yarn run min",
+		"min": "stylus -w -c stylus/flexgridcombo.styl -o dist/flexgridcombo.min.css",
+		"main": "stylus -w stylus/flexgridcombo.styl -o dist/flexgridcombo.css",
+		"demo": "stylus -w stylus/demo.styl -o css/demo.css"
+	}
+}

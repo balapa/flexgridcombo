@@ -1,0 +1,15 @@
+colorArray = #ff3838, #3ae374, #17c0eb, #ff9f1a, #8c7ae6, #718093
+
+@import 'mixins/breakpoints'
+
+.box-list {
+	padding 10px
+}
+
+.box {
+	height 100px
+}
+
+for color, i in colorArray
+	.box:nth-child({i + 1})
+		background color
