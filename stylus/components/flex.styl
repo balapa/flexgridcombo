@@ -25,6 +25,10 @@ verticalPos = {
 	display flex
 	flex-wrap wrap
 
+	&.flex--unwrap {
+		flex-wrap unset
+	}
+
 
 
 	// ******************** //
@@ -41,12 +45,12 @@ verticalPos = {
 
 	for breakpoint in breakpoints
 		+breakpoint-up(breakpoint)
-			for num in flexArray
-				.col-{breakpoint}
-					flex-basis 0
-					flex-grow 1
-					max-width 100%
+			.col-{breakpoint}
+				flex-basis 0
+				flex-grow 1
+				max-width 100%
 
+			for num in flexArray
 				.col-{breakpoint}-{num}
 					flex-basis (divider*num)%
 					max-width (divider*num)%
@@ -68,8 +72,10 @@ verticalPos = {
 		&.ver-{prop}
 			align-items val
 
+	breakpoints = 'lg', 'md', 'sm'
+	@import 'mixins/breakpoints'
 	for breakpoint in breakpoints
-		+breakpoint-up(breakpoint)
+		+breakpoint-down(breakpoint)
 			for prop, val in horizontalPos
 				&.{prop}-{breakpoint}
 					justify-content val
