@@ -13,12 +13,14 @@ horizontalPos = {
 	right: flex-end,
 	evenly: space-evenly,
 	between: space-between,
-	around: space-around
+	around: space-around,
+	unset: unset
 }
 verticalPos = {
 	top: flex-start,
-	middle: center,
-	bottom: flex-end
+	center: center,
+	bottom: flex-end,
+	unset: unset
 }
 
 .flex
@@ -60,26 +62,24 @@ verticalPos = {
 
 
 
-	// ******************** //
-	// justify
-	// ******************** //
+// ******************** //
+// justify
+// ******************** //
 
-	for prop, val in horizontalPos
-		&.{prop}
-			justify-content val
+for prop, val in horizontalPos
+	&.justify-{prop}
+		justify-content val
 
-	for prop, val in verticalPos
-		&.ver-{prop}
-			align-items val
+for prop, val in verticalPos
+	&.align-{prop}
+		align-items val
 
-	breakpoints = 'lg', 'md', 'sm'
-	@import 'mixins/breakpoints'
-	for breakpoint in breakpoints
-		+breakpoint-down(breakpoint)
-			for prop, val in horizontalPos
-				&.{prop}-{breakpoint}
-					justify-content val
+for breakpoint in breakpoints
+	+breakpoint-only(breakpoint)
+		for prop, val in horizontalPos
+			&.justify-{prop}-{breakpoint}
+				justify-content val
 
-			for prop, val in verticalPos
-				&.ver-{prop}-{breakpoint}
-					align-items val
+		for prop, val in verticalPos
+			&.align-{prop}-{breakpoint}
+				align-items val
